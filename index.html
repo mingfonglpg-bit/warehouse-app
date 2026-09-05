@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>倉儲視覺化管理系統</title>
+  
+  <!-- CSS 樣式設定 -->
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .hidden { display: none !important; }
+    .map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 15px; }
+    .slot { border: 1px solid #ccc; border-radius: 8px; padding: 10px; text-align: center; cursor: pointer; }
+    .slot.empty { background-color: #f0f0f0; }
+    .slot.occupied { background-color: #d4edda; }
+    .slot.low { background-color: #fff3cd; }
+    .slot-code { font-weight: bold; }
+    .slot-qty { font-size: 1.2em; color: #007bff; }
+    .slot-count { font-size: 0.8em; color: #6c757d; }
+  </style>
+
+  <!-- 1. 引入外部 Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- 登入畫面 -->
+  <div id="loginScreen">
+    <h2>系統登入</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="帳號" required><br><br>
+      <input type="password" id="password" placeholder="密碼" required><br><br>
+      <button type="submit">登入</button>
+    </form>
+  </div>
+
+  <!-- 主系統畫面 -->
+  <div id="app" class="hidden">
+    <h2>倉儲地圖視覺化</h2>
+    <button onclick="app.auth.logout(); location.reload();">登出</button>
+    
+    <!-- 視覺化圖譜容器 -->
+    <div id="mapGrid" class="map-grid"></div>
+  </div>
+
+  <!-- 2. 引入 JS 模組主入口點 (注意 type="module") -->
+  <script type="module" src="./js/App.js"></script>
+
+</body>
+</html>
